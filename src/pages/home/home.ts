@@ -39,8 +39,13 @@ export class HomePage implements OnInit{
 
   fetchTweets() {
   	this.httpService.getData().subscribe((data: Response) => {
-      this.items.push(data.json());
+      this.items = [...this.items, ...data.json()];
       console.log(this.items);
     });
   }
 }
+
+
+
+
+
