@@ -1,6 +1,6 @@
 import { Component, OnInit} from '@angular/core';
 import { HttpService} from '../../app/service';
-import {Http, Response} from '@angular/http';
+import { Response } from '@angular/http';
 
 @Component({
   selector: 'page-home',
@@ -35,26 +35,3 @@ export class HomePage implements OnInit{
     });
   }
 }
-
-
-
-
-
-  doInfinite(infiniteScroll) {
-    console.log('Begin async operation');
-
-    this.fetchTweets();
-    console.log('Async operation has ended');
-    infiniteScroll.complete();
-  }
-
-  fetchTweets() {
-  	this.httpService.getData().subscribe((data: Response) => {
-      this.items = [...this.items, ...data.json()];
-      console.log(this.items);
-    });
-  }
-
-
-
-
