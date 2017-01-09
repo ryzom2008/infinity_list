@@ -23,15 +23,18 @@ export class HomePage implements OnInit{
   doInfinite(infiniteScroll) {
     console.log('Begin async operation');
 
-    this.fetchTweets();
-    console.log('Async operation has ended');
-    infiniteScroll.complete();
-  }
-
-  fetchTweets() {
-  	this.httpService.getData().subscribe((data: Response) => {
-      this.items = [...this.items, ...data.json()];
-      console.log(this.items);
+    this.fetchTweets().then(()=>{
+      infiniteScroll.complete();
     });
+
+    console.log('Async operation has ended');
+
   }
+  fetchTweets() {
+      return this.httpService.getData().then((data: Response) => {
+        this.items = [...this.items, ...data.json()];
+      });
+    }
+
 }
+

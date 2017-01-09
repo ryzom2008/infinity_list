@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Http, Headers, RequestOptions} from '@angular/http';
+import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class HttpService{
@@ -12,12 +13,10 @@ export class HttpService{
         const token = 'Bearer AAAAAAAAAAAAAAAAAAAAALuzygAAAAAAJjhIRVCNYPm%2FWF6%2BsLYaaVqPhaE%3DQZ9dPVXv3NkaNJwPPH1XDxuLv3ORmd8J3BRqCD1I2uEjYqPxr5';
 
     	headers.append('Authorization', token);
-    	//headers.append('Access-Control-Allow-Origin','*');
 
-	    var url = "/1.1/statuses/user_timeline.json?count=100&screen_name=twitterapi";
+	    var url = "/1.1/statuses/user_timeline.json?count=15&screen_name=twitterapi";
 
-	    return this.http.get(url, options);
-
+	    return this.http.get(url, options).toPromise();
 	}
 }
 
