@@ -13,9 +13,7 @@ export class HomePage implements OnInit{
   data:Object;
 
   constructor(private httpService:HttpService) {
-    for (let i = 0; i < 30; i++) {
-      this.items.push( this.items.length );
-    }
+
   }
 
   ngOnInit(){
@@ -26,15 +24,8 @@ export class HomePage implements OnInit{
     console.log('Begin async operation');
 
     this.fetchTweets();
-
-    setTimeout(() => {
-      for (let i = 0; i < 30; i++) {
-        this.items.push( this.items.length );
-      }
-
-      console.log('Async operation has ended');
-      infiniteScroll.complete();
-    }, 500);
+    console.log('Async operation has ended');
+    infiniteScroll.complete();
   }
 
   fetchTweets() {
@@ -45,6 +36,24 @@ export class HomePage implements OnInit{
   }
 }
 
+
+
+
+
+  doInfinite(infiniteScroll) {
+    console.log('Begin async operation');
+
+    this.fetchTweets();
+    console.log('Async operation has ended');
+    infiniteScroll.complete();
+  }
+
+  fetchTweets() {
+  	this.httpService.getData().subscribe((data: Response) => {
+      this.items = [...this.items, ...data.json()];
+      console.log(this.items);
+    });
+  }
 
 
 
