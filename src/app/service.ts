@@ -4,6 +4,7 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class HttpService{
+	page:number=1;
 
     constructor(private http: Http){ }
 
@@ -14,8 +15,8 @@ export class HttpService{
 
     	headers.append('Authorization', token);
 
-	    var url = "/1.1/statuses/user_timeline.json?count=15&screen_name=twitterapi";
-
+	    let url = "/1.1/statuses/user_timeline.json?user_id=446535203&screen_name=papitsot&page="+this.page;
+	    this.page++;
 	    return this.http.get(url, options).toPromise();
 	}
 }
